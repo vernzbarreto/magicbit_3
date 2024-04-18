@@ -18,20 +18,21 @@
 
 ## Hardware Preview
 ### Front
-![image](https://github.com/emakefun/emakefun-docs/blob/master/docs/micro_bit/magic_bit/magicbit_hardware_front_zh.png)
+![image](https://github.com/emakefun/emakefun-docs/raw/master/docs/micro_bit/magic_bit/magicbit_hardware_front.png)
 
 ### Back
-![image](https://github.com/emakefun/emakefun-docs/blob/master/docs/micro_bit/magic_bit/magicbit_hardware_back1_zh.png)
+![image](https://github.com/emakefun/emakefun-docs/raw/master/docs/micro_bit/magic_bit/magicbit_hardware_back.png)
 
 ## Blocks Preview
 ### magicbit blocks
 ![image](https://github.com/emakefun/emakefun-docs/raw/master/docs/micro_bit/magic_bit/magicbit_block.png)
 
 ### on board rgb blocks
-add block link  https://github.com/microsoft/pxt-neopixel
 ![image](https://github.com/emakefun/emakefun-docs/raw/master/docs/micro_bit/magic_bit/rgb_block.png)
 ![image](https://github.com/emakefun/emakefun-docs/raw/master/docs/micro_bit/magic_bit/rgb_more_block.png)
 
+### ir blocks
+![image](https://github.com/emakefun/emakefun-docs/raw/master/docs/micro_bit/magic_bit/ir_block.png)
 
 ## License
 MIT
@@ -44,10 +45,3 @@ MIT
 ```package
 magicbit=github:emakefun/pxt-magicbit
 ```
-
-# Please Contact Us
-Technical support email: support@emakefun.com</br>
-Sales email: ken@emakefun.com</br>
-The latest information download address:https://github.com/emakefun/pxt-magicbit  </br>
-
-
