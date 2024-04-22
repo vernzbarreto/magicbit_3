@@ -135,6 +135,9 @@ namespace magicbit {
     }
 
     let initialized = false
+    let neoStrip: neopixel.Strip;
+    let matBuf = pins.createBuffer(17);
+    let distanceBuf = 0;
 
     function i2cwrite(addr: number, reg: number, value: number) {
         let buf = pins.createBuffer(2)
@@ -297,15 +300,15 @@ namespace magicbit {
 //     //% blockGap=50
 //     //% degree.defl=90
 //     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-//     export function GeekServo(index: Servos, degree: number): void {
-//         if (!initialized) {
-//             initPCA9685()
-//         }
+    export function GeekServo(index: Servos, degree: number): void {
+         if (!initialized) {
+             initPCA9685()
+         }
 //         // 50hz: 20,000 us
-//         let v_us = ((degree - 90) * 20 / 3 + 1500) // 0.6 ~ 2.4
-//         let value = v_us * 4096 / 20000
-//         setPwm(index + 7, 0, value)
-//     }
+         let v_us = ((degree - 90) * 20 / 3 + 1500) // 0.6 ~ 2.4
+         let value = v_us * 4096 / 20000
+         setPwm(index + 7, 0, value)
+     }
 	
     //% blockId=magicbit_stepper_degree block="Stepper 28BYJ-48|%index|degree %degree"
     //% weight=90
