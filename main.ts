@@ -471,6 +471,51 @@ namespace magicbit {
             stopMotor(idx);
         }
     }
+	/**
+         * Get RUS04 distance
+	 *@param pin Microbit ultrasonic pin; eg: P2
+       */
+	//% blockId=magicbit_ultrasonic block="read RgbUltrasonic Distance|pin %pin|cm"
+	//% weight=78
+	export function Ultrasonic(pin: DigitalPin): number {
+		return UltrasonicVer(pin, SonarVersion.V1);
+	}
+
+	function UtrasonicVer(pin: DigitalPin, v: SonarVersion): number {
+
+		//send pulse
+		if (v == SonarVersion.V1) {
+			pins.setPull(pin, PinPullMode.PullNone);
+		}
+		else {pins.setPull(pin, PinPullMode.PullDown); }
+		pins.digitalWritePin(pin, 0);
+		control.waitMicros(2);
+		pins.digitalWritePin(pin, 1);
+		control.waitMicros(50);
+		pins.digitalWritePin(pin, 0);
+
+		// read pulse
+		let d = pins.pulseIn(pin, Pulsevalue.High, 25000);
+		let ret = d;
+		// filter timeout spikes
+		if (ret == 0 && distanceBuf != 0) {
+			ret = distanceBuf;
+		}
+		distanceBuf = d;
+		if (v == SonarVersion.V1) {
+			return Math.floor(ret * 9 / 6 / 58);
+		}
+		return Math.floor(ret / 40 + (ret / 800));
+		// Correction
+	}
+
+	function RgbDisplay(indexstart: number, indexend: number, rgb: RgbColors): void{
+		for (let i = indexstart; i <=indexend; i++) {
+			neoStrip.setPixelColor(i,rgb);
+		}
+		neoStrip.show();
+	}
+ 
 
 	//% blockId="motorbit_rus04" block="On-board Ultrasonic part %index show color %rgb effect %effect" 
 	//% weight=78
