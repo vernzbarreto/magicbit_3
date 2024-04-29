@@ -528,6 +528,78 @@ namespace magicbit {
 	export function Ultrasonic_reading_distance(): number {
 	    return sensors.Ultrasonic(DigitalPin.P2);
 	}
+	if (index == RgbUltrasonics.Left) {
+            start = 4;
+            end = 6;
+        } else if (index == RgbUltrasonics.Right) {
+            start = 7;
+            end = 9;
+		} else if (index == RgbUltrasonics.All) {
+            start = 4;
+            end = 9;
+		}
+        switch(effect) {
+            case ColorEffect.None:
+                RgbDisplay(start, end, rgb);
+                break;
+            case ColorEffect.Breathing:
+            for (let i = 0; i < 255; i+=2) {
+                neoStrip.setBrightness(i);
+                RgbDisplay(start, end, rgb);
+                //basic.pause((255 - i)/2);
+                basic.pause((i < 20)? 80 :(255/i));
+            }
+            for (let i = 255; i > 0; i-=2) {
+                neoStrip.setBrightness(i);
+                RgbDisplay(start, end, rgb);
+                basic.pause((i < 20)? 80 :(255/i));
+            }
+            break;
+            case ColorEffect.Rotate:
+                for (let i = 0; i < 4; i++) {
+                    neoStrip.setPixelColor(start, rgb);
+                    neoStrip.setPixelColor(start+1, 0);
+                    neoStrip.setPixelColor(start+2, 0);
+                    if (index == RgbUltrasonics.All) {
+                        neoStrip.setPixelColor(end-2, rgb);
+                        neoStrip.setPixelColor(end-1, 0);
+                        neoStrip.setPixelColor(end, 0);
+                    }
+                    neoStrip.show();
+                    basic.pause(150);
+                    neoStrip.setPixelColor(start, 0);
+                    neoStrip.setPixelColor(start+1, rgb);
+                    neoStrip.setPixelColor(start+2, 0);
+                    if (index == RgbUltrasonics.All) {
+                        neoStrip.setPixelColor(end-2, 0);
+                        neoStrip.setPixelColor(end-1, rgb);
+                        neoStrip.setPixelColor(end, 0);
+                    }
+                    neoStrip.show();
+                    basic.pause(150);
+                    neoStrip.setPixelColor(start, 0);
+                    neoStrip.setPixelColor(start+1, 0);
+                    neoStrip.setPixelColor(start+2, rgb);
+                    if (index == RgbUltrasonics.All) {
+                        neoStrip.setPixelColor(end-2, 0);
+                        neoStrip.setPixelColor(end-1, 0);
+                        neoStrip.setPixelColor(end, rgb);
+                    }
+                    neoStrip.show();
+                    basic.pause(150);
+                }
+                RgbDisplay(4, 9, 0);
+                break;
+            case ColorEffect.Flash:
+            for (let i = 0; i < 6; i++) {
+                RgbDisplay(start, end, rgb);
+                basic.pause(150);
+                RgbDisplay(start, end, 0);
+                basic.pause(150);
+            }
+            break;
+        }
+}	
 
 
 	//% blockId=Setting_the_on_board_lights block="Setting the on-board lights %index color %rgb Effect %effect"
@@ -536,4 +608,18 @@ namespace magicbit {
 	 sensors.board_rus04_rgb(DigitalPin.P16, offset, 0, rgb, effect);
 	}
 	
+}
+
+/**
+     * Init RGB pixels mounted on magicbit
+     */
+    //% blockId="magicbit_rgb" block="RGB"
+    //% weight=75
+    export function rgb(): neopixel.Strip {
+        if (!neoStrip) {
+            neoStrip = neopixel.create(DigitalPin.P16, 10, NeoPixelMode.RGB)
+        }
+        return neoStrip;
+    }
+
 }
