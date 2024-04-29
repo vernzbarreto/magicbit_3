@@ -604,13 +604,13 @@ namespace magicbit {
 
 	//% blockId=Setting_the_on_board_lights block="Setting the on-board lights %index color %rgb Effect %effect"
 	//% weight=76
-	export function Setting_the_on_board_lights(offset: Offset,rgb: RgbColors, effect: rgb_ColorEffect): void {
-	 sensors.board_rus04_rgb(DigitalPin.P16, offset, 0, rgb, effect);
+	//export function Setting_the_on_board_lights(offset: Offset,rgb: RgbColors, effect: rgb_ColorEffect): void {
+	// sensors.board_rus04_rgb(DigitalPin.P16, offset, 0, rgb, effect);
 	}
 	
 }
 
-**
+//**
      * Init RGB pixels mounted on magicbit
      */
     % blockId="magicbit_rgb" block="RGB"
