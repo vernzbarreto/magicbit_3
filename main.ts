@@ -610,11 +610,11 @@ namespace magicbit {
 	
 }
 
-/**
+**
      * Init RGB pixels mounted on magicbit
      */
-    //% blockId="magicbit_rgb" block="RGB"
-    //% weight=75
+    % blockId="magicbit_rgb" block="RGB"
+    % weight=75
     export function rgb(): neopixel.Strip {
         if (!neoStrip) {
             neoStrip = neopixel.create(DigitalPin.P16, 10, NeoPixelMode.RGB)
